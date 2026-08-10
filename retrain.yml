@@ -1,0 +1,26 @@
+name: Reproducible model retraining
+
+on:
+  workflow_dispatch:
+    inputs:
+      promote:
+        description: "Promote the registered candidate after review"
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    - cron: "17 3 * * 1"
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python -m src.retrain --output artifacts --registry artifacts/registry
+      - name: Promote only when explicitly requested
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.promote == true }}
+        run: python -m src.retrain --output artifacts --registry artifacts/registry --promote
