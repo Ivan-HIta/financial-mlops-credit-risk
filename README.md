@@ -10,7 +10,8 @@ controlled retraining.
 - Model artifact plus explicit model card and threshold decision.
 - FastAPI serving contract with health, prediction and monitoring endpoints.
 - Population Stability Index (PSI) drift checks and alert thresholds.
-- Docker, CI tests, security headers and a retraining command suitable for orchestration.
+- MLflow-style candidate/production registry manifest, deterministic retraining entry point and CI workflow.
+- Docker, Kubernetes serving manifests, Terraform reference, CI tests and security headers.
 - Responsible finance: synthetic data, explainability and human review of decisions.
 
 ## Run
@@ -32,4 +33,3 @@ threshold is documented, predictions are observable and drift creates an explici
 instead of silently degrading decisions.”
 
 This project does not use real customer, bank or employer data.
-
